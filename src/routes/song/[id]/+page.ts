@@ -1,6 +1,7 @@
-import { api } from '../../../lib/subsonic.js';
+import { api } from '$lib/subsonic.js';
+import type { PageLoad } from './$types.js';
 
-export async function load({ params }) {
+export const load: PageLoad = async ({ params }) => {
   const result = await api.getSong({ id: params.id });
   return result;
-}
+};

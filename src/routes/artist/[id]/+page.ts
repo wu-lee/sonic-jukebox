@@ -1,6 +1,7 @@
-import { api } from '../../../lib/subsonic.js';
+import { api } from '$lib/subsonic.js';
+import type { PageLoad } from './$types';
 
-export async function load({ params }) {
+export const load: PageLoad = async ({ params }) => {
   const artist = await api.getArtist({ id: params.id });
   const session = await api.navidromeSession();
   const art = await api.getCoverArt({ id: params.id });
@@ -11,4 +12,4 @@ export async function load({ params }) {
     baseURL: api.baseURL,
     art
   };
-}
+};
