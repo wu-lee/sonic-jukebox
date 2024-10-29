@@ -1,15 +1,11 @@
-import { api } from '$lib/subsonic.js';
+import { api, getCoverArt } from '$lib/subsonic.js';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ params }) => {
   const artist = await api.getArtist({ id: params.id });
-  const session = await api.navidromeSession();
-  const art = await api.getCoverArt({ id: params.id });
+  const urls = await getCoverArt(api, artist.artist.id);
   return {
     ...artist,
-    token: session.subsonicToken,
-    salt: session.subsonicSalt,
-    baseURL: api.baseURL,
-    art
+    coverArt: urls
   };
 };
