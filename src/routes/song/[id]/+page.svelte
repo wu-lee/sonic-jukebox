@@ -5,7 +5,7 @@
 <h1>Song: {data.song.title ?? 'Unknown'}</h1>
 <div>
   <div>
-    By: <a href={data.song.artistId}>{data.song.artist}</a>
+    By: <a href={`../artist/${data.song.artistId}`}>{data.song.artist}</a>
   </div>
   <div>
     <img src={data.song.coverArt ?? ''} />
