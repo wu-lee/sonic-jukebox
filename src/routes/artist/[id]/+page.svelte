@@ -6,7 +6,12 @@
 <nav><a href="../..">Index</a></nav>
 <h1>{data.artist.name ?? 'Unknown'}</h1>
 <div>
-  <!-- div{JSON.stringify(data.artist)}/div -->
+  <img src={data.info.artistInfo2.smallImageUrl} alt="artist image">
+</div>
+<div>
+  {@html data.info.artistInfo2.biography}
+</div>
+<div>
   <ul>
     {#each data.artist.album as album}
       <li>
