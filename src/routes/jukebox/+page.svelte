@@ -1,9 +1,9 @@
 <script lang="ts">
   import { SubsonicSession, JukeboxControl, api } from '$lib/subsonic.svelte.ts';
-  //  export let data: PageLoad;
+  import { browser } from '$app/environment';
   
-  let jukebox = new JukeboxControl(1);
-  jukebox.get();
+  let jukebox = new JukeboxControl();
+  if (browser) jukebox.autoRefresh(true); // don't want this on the server!
 </script>
 
 <h1>Playlist: {jukebox.playing? "playing": "stopped"}

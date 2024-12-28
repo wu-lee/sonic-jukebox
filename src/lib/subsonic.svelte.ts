@@ -68,36 +68,58 @@ export class JukeboxControl {
   gain: number = $state(0);
   position: number = $state(0);
   entry: Child[] = $state([]);
+  timerId?: number = undefined;
 
-  constructor(readonly updateInterval?: number) {
-    if (updateInterval !== undefined && updateInterval > 0) {
-      setInterval(() => this.refresh(), updateInterval * 1000);
+  constructor() {}
+
+  autoRefresh(enable: boolean = true) {
+    let seconds = 0;
+    // Clear any existing timer
+    if (this.timerId !== undefined) {
+      clearInterval(this.timerId);
+      this.timerId = undefined;
+    }
+
+    // Add a new one if we're enabled
+    if (enable) {
+      this.timerId = setInterval(() => {
+        // infer the update frequency from the playing status.
+        const freq = this.playing ? 1 : 15;
+        // console.log('seconds', seconds, freq); // DEBUG
+        if (seconds % freq === 0) {
+          api.jukeboxControl({ action: 'get' }).then((result) => {
+            this.update(result.jukeboxPlaylist);
+          });
+          seconds = 0;
+        }
+        seconds += 1;
+      }, 1000); // run every second
     }
   }
 
-  async refresh() {
-    const { jukeboxStatus } = await api.jukeboxControl({ action: 'status' });
-    this.update(jukeboxStatus);
+  async refresh(get: boolean = true) {
+    if (get) {
+      const result = await api.jukeboxControl({ action: 'get' });
+      this.update(result.jukeboxPlaylist);
+    } else {
+      const result = await api.jukeboxControl({ action: 'status' });
+      this.update(result.jukeboxStatus);
+    }
   }
 
   update(state?: JukeboxPlaylist) {
-    console.log(state); // DEBUG
+    console.log('update', state); // DEBUG
     if (!state) return;
     this.currentIndex = state.currentIndex;
     this.playing = state.playing;
     this.gain = state.gain;
     if (state.position !== undefined) this.position = state.position;
-    if (state.entry) this.entry = state.entry;
-  }
-
-  async get() {
-    const { jukeboxPlaylist } = await api.jukeboxControl({ action: 'get' });
-    this.update(jukeboxPlaylist);
+    this.entry = state.entry ?? [];
   }
 
   private async simply(action: 'start' | 'stop' | 'status' | 'clear' | 'shuffle') {
     const { jukeboxStatus } = await api.jukeboxControl({ action });
-    await this.get();
+    await this.refresh(true);
   }
 
   async start() {
@@ -122,29 +144,29 @@ export class JukeboxControl {
 
   async add(id: string) {
     await api.jukeboxControl({ action: 'add', id });
-    await this.get();
+    await this.refresh();
   }
 
   async set(id: string) {
     await api.jukeboxControl({ action: 'set', id });
-    await this.get();
+    await this.refresh();
   }
 
   async remove(index?: number) {
     index ??= this.currentIndex;
     await api.jukeboxControl({ action: 'remove', index });
-    await this.get();
+    await this.refresh();
   }
 
   async skipSong(index?: number) {
     index ??= this.currentIndex + 1;
     await api.jukeboxControl({ action: 'skip', index });
-    await this.get();
+    await this.refresh();
   }
 
   async skipSecs(offset: number) {
     await api.jukeboxControl({ action: 'skip', offset });
-    await this.get();
+    await this.refresh();
   }
 
   async setGain(gain: number) {
