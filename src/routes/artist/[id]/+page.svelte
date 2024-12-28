@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { config } from '$lib/subsonic.js';
   export let data;
 </script>
 

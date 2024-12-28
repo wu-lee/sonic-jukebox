@@ -1,4 +1,4 @@
-import { api } from '$lib/subsonic.js';
+import { api } from '$lib/subsonic.svelte.js';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
