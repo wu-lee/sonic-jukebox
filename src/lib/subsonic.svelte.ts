@@ -97,7 +97,7 @@ export class JukeboxControl {
 
   private async simply(action: 'start' | 'stop' | 'status' | 'clear' | 'shuffle') {
     const { jukeboxStatus } = await api.jukeboxControl({ action });
-    this.update(jukeboxStatus);
+    await this.get();
   }
 
   async start() {
