@@ -5,7 +5,7 @@
 <nav><a href="../..">Index</a></nav>
 <h1>{data.artist.name ?? 'Unknown'}</h1>
 <div>
-  <img src={data.info.artistInfo2.smallImageUrl} alt="artist image">
+  <img src={data.info.artistInfo2.smallImageUrl} alt="artist">
 </div>
 <div>
   {@html data.info.artistInfo2.biography}
