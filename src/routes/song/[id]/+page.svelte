@@ -6,7 +6,6 @@
   let { jukebox, session, song } = data;
 </script>
 
-<nav><a href={`${baseUrl}/`}>Index</a></nav>
 <h1>Song: {song.title ?? 'Unknown'}</h1>
 <div>
   <div class="navigation">

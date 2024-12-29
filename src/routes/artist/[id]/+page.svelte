@@ -7,7 +7,6 @@
   let { jukebox, session, artist } = data;
 </script>
 
-<nav><a href={`${baseUrl}/`}>Index</a></nav>
 <ArtistBlock artist={artist} />
 
 <h2>Albums</h2>

@@ -8,7 +8,6 @@
   let { jukebox, session, album } = data;
 </script>
 
-<nav><a href={`${baseUrl}/`}>Index</a></nav>
 <div>
   <AlbumBlock album={album} coverArtUrl={session.coverArtURL(album.id)} />
 
