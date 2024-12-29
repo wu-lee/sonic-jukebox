@@ -11,7 +11,11 @@
   <ul class="song-attributes">
     <li><a href={`../../song/${song.id}`}>{song.title}</a></li>
     <li>By: <a href={`${baseUrl}/artist/${song.artistId}`}>{song.artist}</a></li>
-    <li>Album: <a href={`${baseUrl}/album/${song.parent}`}>{song.album}</a> disk {song.diskNumber}</li>
+    <li>Album: <a href={`${baseUrl}/album/${song.parent}`}>{song.album}</a>
+      {#if song.diskNumber }
+        disk {song.diskNumber}
+      {/if}
+    </li>
     <li>Duration: {song.duration}s</li>
     <li>Year: {song.year}</li>
     <li>BPM: {song.bpm}</li>
