@@ -1,6 +1,5 @@
 <script lang="ts">
   import { baseUrl } from "$lib/app.js";
-  import { JukeboxControl } from "$lib/subsonic.svelte.js";
   import SongBlock from "$lib/SongBlock.svelte";
   let { data } = $props();
   let { jukebox, session, song } = data;
