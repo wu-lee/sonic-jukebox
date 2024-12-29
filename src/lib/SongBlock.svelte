@@ -1,13 +1,21 @@
 <script lang="ts">
   import { type Child } from 'subsonic-api';
   import { baseUrl } from '$lib/app.ts';
+  import { page } from '$app/stores';
   interface Props {
     song: Child;
+    data: any;
   }
   let { song }: Props = $props();
+  let { jukebox } = $page.data;
 </script>
 
 <div class="song-block">
+  <div class="navigation">
+    <button on:click={() => jukebox.add(song.id)} >
+      add
+    </button>
+  </div>
   <ul class="song-attributes">
     <li><a href={`../../song/${song.id}`}>{song.title}</a></li>
     <li>By: <a href={`${baseUrl}/artist/${song.artistId}`}>{song.artist}</a></li>
