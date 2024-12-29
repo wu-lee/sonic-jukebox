@@ -1,24 +1,21 @@
 <script lang="ts">
-  export let data;
+  //  import { PageData } from '$types';
+  import { baseUrl } from "$lib/app.js";
+  import ArtistBlock from "$lib/ArtistBlock.svelte";
+  import AlbumBlock from "$lib/AlbumBlock.svelte";
+  let { data } = $props();
+  let { jukebox, session, artist } = data;
 </script>
 
-<nav><a href="../..">Index</a></nav>
-<h1>{data.artist.name ?? 'Unknown'}</h1>
-<div>
-  <img src={data.info.artistInfo2.smallImageUrl} alt="artist">
-</div>
-<div>
-  {@html data.info.artistInfo2.biography}
-</div>
+<nav><a href={`${baseUrl}/`}>Index</a></nav>
+<ArtistBlock artist={artist} />
+
+<h2>Albums</h2>
 <div>
   <ul>
-    {#each data.artist.album as album}
-      <li>
-        <img
-          src={data.coverArt[album.id]}
-          alt="album cover art"
-        />
-        <a href={`../album/${album.id}`}>{album.name}</a>
+    {#each artist.album as album}
+      <li>{album.name}
+        <AlbumBlock album={album} coverArtUrl={session.coverArtURL(album.id)} />
       </li>
     {/each}
   </ul>

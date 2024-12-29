@@ -43,7 +43,7 @@ export class SubsonicSession {
   }
 
   // Create a session object from the api
-  static async load(_api: SubsonicAPI = api) {
+  static async load(_api: SubsonicAPI = api): Promise<SubsonicSession> {
     const session = await _api.navidromeSession();
     const baseURL = _api.baseURL();
     return new SubsonicSession({ ...session, baseURL });

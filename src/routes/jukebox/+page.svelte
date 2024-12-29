@@ -1,11 +1,3 @@
-<script lang="ts">
-  import { SubsonicSession, JukeboxControl, api } from '$lib/subsonic.svelte.ts';
-  import { browser } from '$app/environment';
-  
-  let jukebox = new JukeboxControl();
-  if (browser) jukebox.autoRefresh(true); // don't want this on the server!
-</script>
-
 <h1>Playlist: {jukebox.playing? "playing": "stopped"}
   index {jukebox.currentIndex}
   at position {jukebox.position} gain {jukebox.gain}</h1>
