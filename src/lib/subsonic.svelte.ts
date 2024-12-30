@@ -159,7 +159,8 @@ export class JukeboxControl {
   }
 
   async skipSong(index?: number) {
-    index ??= this.currentIndex + 1;
+    index ??= 1;
+    this.currentIndex += index;
     await api.jukeboxControl({ action: 'skip', index });
     await this.refresh();
   }
