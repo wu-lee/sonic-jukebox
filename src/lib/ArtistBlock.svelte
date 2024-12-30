@@ -6,10 +6,12 @@
   let { artist }: Props = $props();
 </script>
 
-<h1>Artist: {artist.name ?? 'Unknown'}</h1>
-<div>
-  <img src={artist.smallImageUrl} alt="artist">
-</div>
-<div>
-  {@html artist.biography}
+<div class="artist">
+  <h1>Artist: {artist.name ?? 'Unknown'}</h1>
+  <div class="image">
+    <img src={artist.smallImageUrl} alt="artist">
+  </div>
+  <div>
+    {@html artist.biography}
+  </div>
 </div>
