@@ -25,7 +25,7 @@
     class="flex items-center gap-x-0.5"
   >
     <Toolbar.GroupItem
-      on:click={() => jukebox.clear()}
+      onclick={() => jukebox.clear()}
       aria-label="clear playlist"
       value="clear"
       {...commonGroupProps}
@@ -42,7 +42,7 @@
     class="flex items-center gap-x-0.5"
   >
     <Toolbar.GroupItem
-      on:click={() => jukebox.skipSong(-1)}
+      onclick={() => jukebox.skipSong(-1)}
       aria-label="skip back a song"
       value="backward"
       {...commonGroupProps}
@@ -50,7 +50,7 @@
       <Rewind class="size-6" />
     </Toolbar.GroupItem>
     <Toolbar.GroupItem
-      on:click={() => jukebox.start()}
+      onclick={() => jukebox.start()}
       aria-label="start playing"
       value="play"
       {...commonGroupProps}
@@ -58,7 +58,7 @@
       <Play class="size-6" />
     </Toolbar.GroupItem>
     <Toolbar.GroupItem
-      on:click={() => jukebox.stop()}
+      onclick={() => jukebox.stop()}
       aria-label="pause playing"
       value="pause"
       {...commonGroupProps}
@@ -66,7 +66,7 @@
       <Pause class="size-6" />
     </Toolbar.GroupItem>
     <Toolbar.GroupItem
-      on:click={() => jukebox.skipSong()}
+      onclick={() => jukebox.skipSong()}
       aria-label="skip forward a song"
       value="forward"
       {...commonGroupProps}
@@ -79,7 +79,7 @@
 
   <div class="flex items-center">
     <Toolbar.Button
-      on:click={() => jukebox.shuffle()}
+      onclick={() => jukebox.shuffle()}
       aria-label="shuffle the playlist"
       value="shuffle"
       {...commonGroupProps}
