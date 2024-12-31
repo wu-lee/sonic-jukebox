@@ -1,23 +1,29 @@
 <script lang="ts">
-  export let data;
+  import type { PageData } from "./$types";
+  import type { Indexes } from "subsonic-api";
+  import { baseUrl } from "$lib/app.js";
+  interface Props {
+    data: {
+      indexes: Indexes,
+    }
+  }
+  let { data }: Props = $props();
+  let { indexes } = data;
 </script>
 
-<h1>Index</h1>
 <div>
   <div>
-    <div>
-      {#each data.indexes.index as index}
+    {#each indexes.index as index}
+      <div>
+        <div>{index.name}</div>
         <div>
-          <div>{index.name}</div>
-          <div>
-            {#each index.artist as artist}
-              <div>
-                <a href={`./artist/${artist.id}`}>{artist.name}</a>
-              </div>
-            {/each}
-          </div>
+          {#each index.artist as artist}
+            <div>
+              <a href={`${baseUrl}/artist/${artist.id}`}>{artist.name}</a>
+            </div>
+          {/each}
         </div>
-      {/each}
-    </div>
+      </div>
+    {/each}
   </div>
 </div>
