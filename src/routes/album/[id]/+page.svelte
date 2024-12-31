@@ -4,7 +4,7 @@
   import DataTable from '$lib/components/ui/data-table.svelte';
   import AlbumBlock from "$lib/AlbumBlock.svelte";
   import SongBlock from "$lib/SongBlock.svelte";
-  import { songColumns } from "$lib/SongColumns.ts";
+  import { commonSongColumns, albumSongColumns } from "$lib/SongColumns.ts";
 
   let { data } = $props();
   let { jukebox, session, album } = data;
@@ -12,6 +12,5 @@
 
 <div>
   <AlbumBlock album={album} coverArtUrl={session.coverArtURL(album.id)} />
-
-  <DataTable data={album.song} columns={songColumns} />
+  <DataTable data={album.song} columns={albumSongColumns.concat(commonSongColumns)} />
 </div>

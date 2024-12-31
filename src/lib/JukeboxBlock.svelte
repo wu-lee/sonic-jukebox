@@ -1,7 +1,9 @@
 <script lang="ts">
   import { baseUrl } from '$lib/app.ts';
+  import DataTable from '$lib/components/ui/data-table.svelte';
   import JukeboxToolbar from "$lib/JukeboxToolbar.svelte";
   import SongBlock from "$lib/SongBlock.svelte";
+  import { commonSongColumns, jukeboxSongColumns } from "$lib/SongColumns.ts";
   import { page } from "$app/state";
   let { jukebox } = page.data;
 </script>
@@ -11,16 +13,5 @@
     index {jukebox.currentIndex}
     at position {jukebox.position} gain {jukebox.gain}</h1>
   <JukeboxToolbar />
-  <ul>
-    <li>
-      {#each jukebox.entry as entry, index}
-        <div class="controls">
-          <button on:click={() => jukebox.remove(index)} >
-            remove
-          </button>
-        </div>
-        <SongBlock song={entry} />
-      {/each}
-    </li>
-  </ul>
+  <DataTable data={jukebox.entry} columns={jukeboxSongColumns.concat(commonSongColumns)} />
 </div>

@@ -1,4 +1,4 @@
-import type { ColumnDef, Row } from '@tanstack/table-core';
+import type { CellContext, ColumnDef, Row } from '@tanstack/table-core';
 import { createRawSnippet } from 'svelte';
 import { renderComponent, renderSnippet } from '$lib/components/ui/data-table/index.js';
 import { baseUrl } from '$lib/app.js';
@@ -42,20 +42,22 @@ function mkLinkCellRenderer<T>(
   return ({ row }: { row: Row<T> }) => renderSnippet(snippet, getValues(row, [idParam, nameParam]));
 }
 
-function mkButtonCellRenderer<T>(label: string, idParam: string) {
-  return ({ row }: { row: Row<T> }) => {
+function mkButtonCellRenderer<T, U>(
+  label: string,
+  idParam: string,
+  clickHandler: (cc: CellContext<T, U>) => void
+) {
+  return (context: CellContext<T, U>) => {
+    const row = context.row;
     const values = getValues(row, [idParam]);
-
-    return renderComponent(ButtonCell, { label, songId: values[idParam] });
+    const onclick = () => {
+      clickHandler(context);
+    };
+    return renderComponent(ButtonCell, { label, songId: values[idParam], onclick });
   };
 }
 
-export const songColumns: ColumnDef<Child>[] = [
-  {
-    accessorKey: 'id',
-    header: 'Image',
-    cell: mkButtonCellRenderer('add', 'id')
-  },
+export const commonSongColumns: ColumnDef<Child>[] = [
   { accessorKey: 'artistId', header: 'Artist Id' },
   { accessorKey: 'albumId', header: 'Album Id' },
   {
@@ -76,4 +78,24 @@ export const songColumns: ColumnDef<Child>[] = [
   { accessorKey: 'year', header: 'Year' },
   { accessorKey: 'created', header: 'Created' },
   { accessorKey: 'duration', header: 'Duration' }
+];
+
+export const albumSongColumns: ColumnDef<Child>[] = [
+  {
+    accessorKey: 'id',
+    header: 'Nav',
+    cell: mkButtonCellRenderer('add', 'id', (context) =>
+      page.data.jukebox.add(context.row.getValue('id'))
+    )
+  }
+];
+
+export const jukeboxSongColumns: ColumnDef<Child>[] = [
+  {
+    accessorKey: 'id',
+    header: 'Nav',
+    cell: mkButtonCellRenderer('remove', 'id', (context) =>
+      page.data.jukebox.remove(context.row.index)
+    )
+  }
 ];
