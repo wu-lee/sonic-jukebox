@@ -37,6 +37,7 @@
     "vitest": "^2.0.4"
   },
   "dependencies": {
+    "@tanstack/table-core": "^8.20.5",
     "subsonic-api": "^3.0.0"
   }
 }
