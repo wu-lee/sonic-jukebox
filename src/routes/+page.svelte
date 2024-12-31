@@ -1,6 +1,10 @@
 <script lang="ts">
   import type { PageData } from "./$types";
   import type { Indexes } from "subsonic-api";
+  import type { ColumnDef } from '@tanstack/table-core';
+  import type { Artist } from 'subsonic-api';
+  import DataTable, { type DataTableProps } from "$lib/components/ui/data-table.svelte";
+  import { artistColumns } from "$lib/ArtistColumns.js";
   import { baseUrl } from "$lib/app.js";
   interface Props {
     data: {
@@ -15,13 +19,10 @@
   <div>
     {#each indexes.index as index}
       <div>
-        <div>{index.name}</div>
+        <h2>{index.name}</h2>
         <div>
-          {#each index.artist as artist}
-            <div>
-              <a href={`${baseUrl}/artist/${artist.id}`}>{artist.name}</a>
-            </div>
-          {/each}
+          <DataTable data={index.artist} columns={artistColumns} />
+          <!-- -a href={`${baseUrl}/artist/${artist.id}`}>{artist.name}</a -->
         </div>
       </div>
     {/each}
