@@ -2,8 +2,8 @@
   import { baseUrl } from '$lib/app.ts';
   import JukeboxToolbar from "$lib/JukeboxToolbar.svelte";
   import SongBlock from "$lib/SongBlock.svelte";
-  import { page } from "$app/stores";
-  let { jukebox } = $page.data;
+  import { page } from "$app/state";
+  let { jukebox } = page.data;
 </script>
 
 <div class="jukebox">
