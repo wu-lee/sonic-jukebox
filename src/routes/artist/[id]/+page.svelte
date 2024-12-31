@@ -1,8 +1,10 @@
 <script lang="ts">
   //  import { PageData } from '$types';
+  import DataTable from '$lib/components/ui/data-table.svelte';
   import { baseUrl } from "$lib/app.js";
   import ArtistBlock from "$lib/ArtistBlock.svelte";
   import AlbumBlock from "$lib/AlbumBlock.svelte";
+  import { albumColumns } from "$lib/AlbumColumns.ts";
   let { data } = $props();
   let { jukebox, session, artist } = data;
 </script>
@@ -11,11 +13,5 @@
 
 <h2>Albums</h2>
 <div>
-  <ul>
-    {#each artist.album as album}
-      <li>{album.name}
-        <AlbumBlock album={album} coverArtUrl={session.coverArtURL(album.id)} />
-      </li>
-    {/each}
-  </ul>
+  <DataTable data={artist.album} columns={albumColumns} />
 </div>
