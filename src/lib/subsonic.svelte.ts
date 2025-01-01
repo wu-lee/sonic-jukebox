@@ -108,7 +108,7 @@ export class JukeboxControl {
   }
 
   update(state?: JukeboxPlaylist) {
-    console.log('update', state); // DEBUG
+    //console.log('update', state); // DEBUG
     if (!state) return;
     this.currentIndex = state.currentIndex;
     this.playing = state.playing;
