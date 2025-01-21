@@ -10,22 +10,31 @@
   let { children, data } = $props();
 </script>
 
-<div class="top">
-  <Tabs.Root value="directory" class="w-[100%]">
-    <Tabs.List class="w-[100%] justify-stretch" >
+<div class="w-full flex flex-col h-screen">
+  <Tabs.Root value="directory" class="h-full flex flex-col flex-1">
+    <!-- height: auto required here to prevent headers ballooning -->
+    <Tabs.List class="w-full h-auto justify-stretch" >
       <Tabs.Trigger value="directory">Directory</Tabs.Trigger>
       <Tabs.Trigger value="jukebox">Jukebox</Tabs.Trigger>
     </Tabs.List>
-    <Tabs.Content value="directory">
-      <ScrollArea class="h-[100vh] w-[100vw]">
-        <nav><a href={`${baseUrl}/`}>Index</a></nav>
-        <div class="children">
+    <!-- min-height 0 required here to prevent overflow -->
+    <Tabs.Content value="directory"  class="min-h-0">
+      <!-- this div is also needed to ensure the scroll area behaves and doesn't overflow -->
+      <div class="h-full flex flex-col">
+        <nav class=""><a href={`${baseUrl}/`}>Index</a></nav>
+        <ScrollArea >
           {@render children()}
-        </div>
-      </ScrollArea>
+        </ScrollArea>
+      </div>
     </Tabs.Content>
-    <Tabs.Content value="jukebox">
-      <JukeboxBlock />
+    <!-- min-height 0 required here to prevent overflow -->
+    <Tabs.Content value="jukebox" class="min-h-0">
+      <div class="h-full flex flex-col">
+        <!-- this div is needed to ensure the scroll area behaves and doesn't overflow -->
+        <ScrollArea class="h-full">
+          <JukeboxBlock class="h-full" />
+        </ScrollArea>
+      </div>
     </Tabs.Content>
   </Tabs.Root>
 </div>
