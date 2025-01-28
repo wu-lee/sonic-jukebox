@@ -14,18 +14,12 @@
   <Tabs.Root value="directory" class="h-full flex flex-col flex-1">
     <!-- height: auto required here to prevent headers ballooning -->
     <Tabs.List class="w-full h-auto justify-stretch" >
-      <Tabs.Trigger value="directory">Directory</Tabs.Trigger>
+      <Tabs.Trigger value="directory"><a href={`${baseUrl}/`}>Directory</a></Tabs.Trigger>
       <Tabs.Trigger value="jukebox">Jukebox</Tabs.Trigger>
     </Tabs.List>
     <!-- min-height 0 required here to prevent overflow -->
     <Tabs.Content value="directory"  class="min-h-0">
-      <!-- this div is also needed to ensure the scroll area behaves and doesn't overflow -->
-      <div class="h-full flex flex-col">
-        <nav class=""><a href={`${baseUrl}/`}>Index</a></nav>
-        <ScrollArea >
-          {@render children()}
-        </ScrollArea>
-      </div>
+      {@render children()}
     </Tabs.Content>
     <!-- min-height 0 required here to prevent overflow -->
     <Tabs.Content value="jukebox" class="min-h-0">

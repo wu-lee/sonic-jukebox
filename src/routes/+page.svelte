@@ -1,6 +1,8 @@
 <script lang="ts">
+  import * as Tabs from "$lib/components/ui/tabs/index.js";
+  import { ScrollArea } from "$lib/components/ui/scroll-area/index.js";
   import type { PageData } from "./$types";
-  import type { Indexes } from "subsonic-api";
+  import type { Indexes, MusicFolders } from "subsonic-api";
   import type { ColumnDef } from '@tanstack/table-core';
   import type { Artist } from 'subsonic-api';
   import DataTable, { type DataTableProps } from "$lib/components/ui/data-table.svelte";
@@ -15,16 +17,23 @@
   let { indexes } = data;
 </script>
 
-<div>
-  <div>
+<!-- this div is also needed to ensure the scroll area behaves and doesn't overflow -->
+<div class="h-full flex flex-col">
+  <Tabs.Root>
+    <Tabs.List>
+      {#each indexes.index as index}
+        <Tabs.Trigger value={index.name}>
+          {index.name}
+        </Tabs.Trigger>
+      {/each}
+    </Tabs.List>
     {#each indexes.index as index}
-      <div>
-        <h2>{index.name}</h2>
-        <div>
+      <Tabs.Content value={index.name}>
+        <ScrollArea >
           <DataTable data={index.artist} columns={artistColumns} />
           <!-- -a href={`${baseUrl}/artist/${artist.id}`}>{artist.name}</a -->
-        </div>
-      </div>
+        </ScrollArea>
+      </Tabs.Content>
     {/each}
-  </div>
+  </Tabs.Root>
 </div>
