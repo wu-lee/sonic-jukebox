@@ -6,6 +6,8 @@
   import { commonSongColumns, jukeboxSongColumns } from "$lib/SongColumns.ts";
   import { page } from "$app/state";
   let { jukebox } = page.data;
+
+  let rowSelection = $derived({ [jukebox.currentIndex]: true });
 </script>
 
 <div class="jukebox">
@@ -13,5 +15,5 @@
     index {jukebox.currentIndex}
     at position {jukebox.position} gain {jukebox.gain}</h1>
   <JukeboxToolbar />
-  <DataTable data={jukebox.entry} columns={jukeboxSongColumns.concat(commonSongColumns)} />
+  <DataTable data={jukebox.entry} rowSelection={rowSelection} columns={jukeboxSongColumns.concat(commonSongColumns)} />
 </div>

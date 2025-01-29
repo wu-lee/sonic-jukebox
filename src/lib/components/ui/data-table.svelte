@@ -1,5 +1,5 @@
 <script lang="ts" generics="TData, TValue">
-  import { type ColumnDef, getCoreRowModel } from "@tanstack/table-core";
+  import { type ColumnDef, getCoreRowModel, type RowSelection } from "@tanstack/table-core";
   import {
     createSvelteTable,
     FlexRender,
@@ -8,20 +8,24 @@
   
   export type DataTableProps<TData, TValue> = {
     columns: ColumnDef<TData, TValue>[];
+    rowSelection?: RowSelection,
     data: TData[];
   };
   
-  let { data, columns }: DataTableProps<TData, TValue> = $props();
+  let { data, rowSelection, columns }: DataTableProps<TData, TValue> = $props();
   
   const table = createSvelteTable({
     get data() {
       return data;
     },
     columns,
+    get state() {
+      return { rowSelection: rowSelection ?? {} };
+    },
     getCoreRowModel: getCoreRowModel(),
   });
 </script>
- 
+
 <div class="rounded-md border">
   <Table.Root>
     <Table.Header>
