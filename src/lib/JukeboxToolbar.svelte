@@ -49,22 +49,25 @@
     >
       <Rewind class="size-6" />
     </Toolbar.GroupItem>
-    <Toolbar.GroupItem
-      onclick={() => jukebox.start()}
-      aria-label="start playing"
-      value="play"
-      {...commonGroupProps}
-      >
-      <Play class="size-6" />
-    </Toolbar.GroupItem>
-    <Toolbar.GroupItem
-      onclick={() => jukebox.stop()}
-      aria-label="pause playing"
-      value="pause"
-      {...commonGroupProps}
-      >
-      <Pause class="size-6" />
-    </Toolbar.GroupItem>
+    {#if jukebox.playing}
+      <Toolbar.GroupItem
+        onclick={() => jukebox.stop()}
+        aria-label="pause playing"
+        value="pause"
+        {...commonGroupProps}
+        >
+        <Pause class="size-6" />
+      </Toolbar.GroupItem>
+    {:else}
+      <Toolbar.GroupItem
+        onclick={() => jukebox.start()}
+          aria-label="start playing"
+        value="play"
+        {...commonGroupProps}
+        >
+        <Play class="size-6" />
+      </Toolbar.GroupItem>
+    {/if}
     <Toolbar.GroupItem
       onclick={() => jukebox.skipSong()}
       aria-label="skip forward a song"
