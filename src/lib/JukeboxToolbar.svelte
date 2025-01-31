@@ -5,7 +5,9 @@
   import Pause from "virtual:icons/iconoir/pause";
   import Rewind from "virtual:icons/iconoir/rewind";
   import Forward from "virtual:icons/iconoir/forward";
-  import Mute from "virtual:icons/iconoir/sound-off";
+  import Mute from "virtual:icons/iconoir/sound-off"; 
+  import VolumeUp from "virtual:icons/iconoir/sound-high";
+  import VolumeDown from "virtual:icons/iconoir/sound-low";
   import Trash from "virtual:icons/iconoir/trash";
   import { page } from "$app/stores";
   let { jukebox } = $page.data;
@@ -96,8 +98,23 @@
       value="mute"
       {...commonGroupProps}
       >
-      <Mute class="size-6" />
+      <Mute class="size-6" ></Mute>
     </Toolbar.Button>
-    
+    <Toolbar.Button
+      onclick={() =>jukebox.setGain(jukebox.gain+.1)}
+      aria-label="volume up"
+      value="volume up"
+      {...commonGroupProps}
+      >
+      <VolumeUp class="size-6" />      
+    </Toolbar.Button>
+    <Toolbar.Button
+      onclick={() =>jukebox.setGain(jukebox.gain-.1)}
+      aria-label="volume down"
+      value="volume down"
+      {...commonGroupProps}
+      >
+      <VolumeDown class="size-6" />
+    </Toolbar.Button>
   </div>
 </Toolbar.Root>
