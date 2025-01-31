@@ -11,9 +11,6 @@
 </script>
 
 <div class="jukebox">
-  <h1>Playlist: {jukebox.playing? "playing": "stopped"}
-    index {jukebox.currentIndex}
-    at position {jukebox.position} gain {jukebox.gain}</h1>
   <JukeboxToolbar />
   <DataTable data={jukebox.entry} rowSelection={rowSelection} columns={jukeboxSongColumns.concat(commonSongColumns)} />
 </div>
