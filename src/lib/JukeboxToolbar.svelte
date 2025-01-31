@@ -5,6 +5,7 @@
   import Pause from "virtual:icons/iconoir/pause";
   import Rewind from "virtual:icons/iconoir/rewind";
   import Forward from "virtual:icons/iconoir/forward";
+  import Mute from "virtual:icons/iconoir/sound-off";
   import Trash from "virtual:icons/iconoir/trash";
   import { page } from "$app/stores";
   let { jukebox } = $page.data;
@@ -61,7 +62,7 @@
     {:else}
       <Toolbar.GroupItem
         onclick={() => jukebox.start()}
-          aria-label="start playing"
+        aria-label="start playing"
         value="play"
         {...commonGroupProps}
         >
@@ -73,7 +74,7 @@
       aria-label="skip forward a song"
       value="forward"
       {...commonGroupProps}
-    >
+      >
       <Forward class="size-6" />
     </Toolbar.GroupItem>
   </Toolbar.Group>
@@ -86,8 +87,17 @@
       aria-label="shuffle the playlist"
       value="shuffle"
       {...commonGroupProps}
-    >
+      >
       <Shuffle class="size-6" />
     </Toolbar.Button>
+    <Toolbar.Button
+      onclick={() => jukebox.setGain(0)}
+      aria-label="mute volume"
+      value="mute"
+      {...commonGroupProps}
+      >
+      <Mute class="size-6" />
+    </Toolbar.Button>
+    
   </div>
 </Toolbar.Root>
