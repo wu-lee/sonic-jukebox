@@ -12,7 +12,7 @@
 
 <div class="song-block">
   <div class="navigation">
-    <button on:click={() => jukebox.add(song.id)} >
+    <button onclick={() => jukebox.add(song.id)} >
       add
     </button>
   </div>
